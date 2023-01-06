@@ -1,0 +1,18 @@
+/*
+import 'config_firebase'{ initializeApp } from 'firebase/app';
+import 'config_firebase'{ getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import 'config_firebase'{ initializeApp } from 'firebase/<service>';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAIUqVAnlW7FACE_gQLqQ1uaimtiEwD_yc",
+  authDomain: "test-login-please.firebaseapp.com",
+  projectId: "test-login-please",
+  storageBucket: "test-login-please.appspot.com",
+  messagingSenderId: "357713537837",
+  appId: "1:357713537837:web:f49dbe4c2d35f6d03601a4",
+  measurementId: "G-CMY8B8PK8R"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+*/
