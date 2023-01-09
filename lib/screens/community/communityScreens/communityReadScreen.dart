@@ -1,12 +1,12 @@
 import 'package:aka_project/screens/community/communityScreens/communityListScreen.dart';
 import 'package:aka_project/screens/community/communityScreens/communityReportScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:aka_project/screens/community/services/firebaseService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:aka_project/screens/community/models/post.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:aka_project/screens/community/services/toast.dart';
 
 enum AnonymousStatus { on, off }
 
@@ -91,25 +91,12 @@ class _CommuReadState extends State<CommuReadScreen> {
     });
   }
 
-  // 토스트
-  void showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.orange[300],
-      textColor: Colors.white,
-      fontSize: 12.0,
-    );
-  }
-
   // 게시글 좋아요
   void likeUp() {
     setState(() {
       if (postLikeState == true) {
         postLikeState = false;
-        showToast("좋아요 취소");
+        ToastService().showToast("좋아요 취소");
         likeNum--;
         PostModel updateModel =
             PostModel(postLikeNum: likeNum, postLikeState: postLikeState);
@@ -118,7 +105,7 @@ class _CommuReadState extends State<CommuReadScreen> {
             json: updateModel.toJsonPostLikeNum());
       } else {
         postLikeState = true;
-        showToast("좋아요");
+        ToastService().showToast("좋아요");
         likeNum++;
         PostModel updateModel =
             PostModel(postLikeNum: likeNum, postLikeState: postLikeState);
@@ -304,9 +291,9 @@ class _CommuReadState extends State<CommuReadScreen> {
                         setState(() {});
                       },
                     );
-                    showToast("해당 게시물이 삭제됐습니다.");
+                    ToastService().showToast("해당 게시물이 삭제됐습니다.");
                   } else {
-                    showToast("해당 작성자가 아닙니다.");
+                    ToastService().showToast("해당 작성자가 아닙니다.");
                     Navigator.pop(context);
                   }
                 });
@@ -373,7 +360,7 @@ class _CommuReadState extends State<CommuReadScreen> {
                         commentUp();
                         dataList.add(CommentWidget(dataList.length));
                       } else {
-                        showToast("로그인 후 댓글 작성하실 수 있습니다.");
+                        ToastService().showToast("로그인 후 댓글 작성하실 수 있습니다.");
                       }
                     });
                   }
@@ -530,7 +517,7 @@ class _CommuReadState extends State<CommuReadScreen> {
                         setState(() {
                           if (commentLikeStateList[index] == false) {
                             commentLikeStateList[index] = true;
-                            showToast("좋아요");
+                            ToastService().showToast("좋아요");
                             commentLikeNumList[index]++;
                             Map<String, dynamic> update = {
                               "commentLikeNum": commentLikeNumList[index]
@@ -543,7 +530,7 @@ class _CommuReadState extends State<CommuReadScreen> {
                                 .update(update);
                           } else {
                             commentLikeStateList[index] = false;
-                            showToast("좋아요 취소");
+                            ToastService().showToast("좋아요 취소");
                             commentLikeNumList[index]--;
                             Map<String, dynamic> update = {
                               "commentLikeNum": commentLikeNumList[index]
@@ -646,9 +633,9 @@ class _CommuReadState extends State<CommuReadScreen> {
                     colRef.doc(commentSequence[index]).delete();
                     commentSequence.removeAt(index);
                     Navigator.pop(context);
-                    showToast("해당 댓글이 삭제됐습니다.");
+                    ToastService().showToast("해당 댓글이 삭제됐습니다.");
                   } else {
-                    showToast("해당 댓글의 작성자가 아닙니다.");
+                    ToastService().showToast("해당 댓글의 작성자가 아닙니다.");
                     Navigator.pop(context);
                   }
                 });

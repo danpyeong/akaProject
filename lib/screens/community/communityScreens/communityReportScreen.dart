@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:aka_project/screens/community/services/firebaseService.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:aka_project/screens/community/models/post.dart';
+import 'package:aka_project/screens/community/services/toast.dart';
 
 class CommuReportScreen extends StatelessWidget {
   const CommuReportScreen({super.key});

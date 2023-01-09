@@ -4,8 +4,8 @@ import 'package:aka_project/screens/community/communityScreens/communityReadScre
 import 'package:aka_project/screens/community/communityScreens/communityWriteScreen.dart';
 import 'package:aka_project/screens/community/models/post.dart';
 import 'package:aka_project/screens/community/services/firebaseService.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:aka_project/screens/community/services/toast.dart';
 
 class CommuListScreen extends StatefulWidget {
   const CommuListScreen({super.key});
@@ -35,18 +35,6 @@ class _CommuListScreenState extends State<CommuListScreen> {
     setState(() {
       userUid = prefs.getString('uid').toString();
     });
-  }
-
-  void showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.orange[300],
-      textColor: Colors.white,
-      fontSize: 12.0,
-    );
   }
 
   @override
@@ -84,7 +72,7 @@ class _CommuListScreenState extends State<CommuListScreen> {
                         setState(() {});
                       });
                     } else {
-                      showToast("로그인 후 글 작성을 이용하실 수 있습니다.");
+                      ToastService().showToast("로그인 후 글 작성을 이용하실 수 있습니다.");
                     }
                   });
                 },
